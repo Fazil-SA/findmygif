@@ -30,7 +30,7 @@ A modern, responsive GIF search engine with a beautiful interface and seamless u
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Fazil-SA/findmygif.git
    cd findmygif
    ```
 
