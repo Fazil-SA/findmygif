@@ -73,9 +73,8 @@ npm start
 - **Background Dark:** Neutral tones
 
 ## 📸 Screenshots
-
-
-
+https://github.com/Fazil-SA/findmygif/blob/1f7c8d616cd8b79400cbcdcc9b19acaf12a4cc2b/sc-1.jpg
+https://github.com/Fazil-SA/findmygif/blob/1f7c8d616cd8b79400cbcdcc9b19acaf12a4cc2b/sc-2.jpg
 
 ## 📄 License
 
