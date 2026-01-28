@@ -127,7 +127,7 @@ export default function Home() {
         <header className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm border-b border-gray-200/50 dark:border-neutral-800/50 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
                 <span className="bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 dark:from-violet-400 dark:via-fuchsia-400 dark:to-pink-400 bg-clip-text text-transparent">
                   find
                 </span>

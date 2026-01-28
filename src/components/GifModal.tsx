@@ -91,19 +91,19 @@ export default function GifModal({ gif, onClose }: GifModalProps) {
               )}
             </div>
 
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex flex-col sm:flex-row gap-2">
               <a
                 href={gif.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white rounded-lg transition-all duration-200 text-sm font-semibold flex items-center gap-2 active:scale-95"
+                className="px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white rounded-lg transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2 active:scale-95"
               >
                 <ExternalLink className="w-4 h-4" />
                 View on Giphy
               </a>
               <button
                 onClick={handleCopyUrl}
-                className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-neutral-700 transition-all duration-200 text-sm font-semibold flex items-center gap-2 active:scale-95"
+                className="px-4 py-2 bg-gray-200 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-neutral-700 transition-all duration-200 text-sm font-semibold flex items-center justify-center gap-2 active:scale-95"
               >
                 {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                 {copied ? 'Copied!' : 'Copy URL'}

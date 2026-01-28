@@ -32,10 +32,10 @@ export default function GifGrid({
     return (
       <div className="text-center py-20">
         <div className="text-6xl mb-4">🔍</div>
-        <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+        <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-2">
           No GIFs found
         </h2>
-        <p className="text-gray-500">
+        <p className="text-sm sm:text-base text-gray-500 dark:text-gray-400">
           Try searching with different keywords
         </p>
       </div>
