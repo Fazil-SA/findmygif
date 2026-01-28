@@ -1,19 +1,39 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import SearchBar from '@/components/SearchBar';
 import GifGrid from '@/components/GifGrid';
 import GifModal from '@/components/GifModal';
+import DarkModeToggle from '@/components/DarkModeToggle';
 import { Gif } from '@/types/gif';
-import { searchGifs } from '@/lib/api';
+import { searchGifs, getTrendingGifs } from '@/lib/api';
+import { Toaster } from 'sonner';
+import { AlertCircle } from 'lucide-react';
 
 export default function Home() {
   const [gifs, setGifs] = useState<Gif[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedGif, setSelectedGif] = useState<Gif | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
+
+  // Load trending GIFs on initial page load
+  useEffect(() => {
+    const loadTrendingGifs = async () => {
+      try {
+        setIsLoading(true);
+        const response = await getTrendingGifs(24);
+        setGifs(response.data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch trending GIFs');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadTrendingGifs();
+  }, []);
 
   const handleSearch = useCallback(async (query: string) => {
     if (!query.trim()) return;
@@ -42,84 +62,105 @@ export default function Home() {
     setSelectedGif(null);
   }, []);
 
+  const handleClear = useCallback(async () => {
+    setSearchQuery('');
+    setHasSearched(false);
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const response = await getTrendingGifs(24);
+      setGifs(response.data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch trending GIFs');
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            GIF Explorer
-          </h1>
-          <p className="text-center text-gray-600 mt-2">
-            Search and discover amazing GIFs
-          </p>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <SearchBar onSearch={handleSearch} isLoading={isLoading} />
-        </div>
-
-        {error && (
-          <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-center">
-            <p className="font-semibold">Error: {error}</p>
-            <p className="text-sm mt-1">
-              {error.includes('API key') && (
-                <>
-                  Please add your Giphy API key to <code className="bg-red-100 px-1 rounded">.env.local</code>
-                </>
-              )}
-            </p>
+    <>
+      <Toaster position="top-right" richColors />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 transition-colors duration-200 flex flex-col">
+        <header className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-neutral-800 sticky top-0 z-10 animate-slideDown">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <div className="flex items-center justify-center relative">
+              <div className="text-center">
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 via-accent-500 to-primary-600 bg-clip-text text-transparent">
+                  GIF Explorer
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
+                  Search and discover amazing GIFs
+                </p>
+              </div>
+              <div className="absolute right-0">
+                <DarkModeToggle />
+              </div>
+            </div>
           </div>
-        )}
+        </header>
 
-        {hasSearched && !isLoading && !error && (
-          <div className="mb-4 text-gray-600">
-            <p>
-              Found <span className="font-semibold text-gray-900">{gifs.length}</span> results
-              {searchQuery && (
-                <> for <span className="font-semibold text-gray-900">&quot;{searchQuery}&quot;</span></>
-              )}
-            </p>
+        <main className="max-w-7xl mx-auto px-4 py-8 flex-1">
+          <div className="mb-8 animate-scaleIn" style={{ animationDelay: '100ms' }}>
+            <SearchBar onSearch={handleSearch} onClear={handleClear} isLoading={isLoading} />
           </div>
-        )}
 
-        {!hasSearched && !isLoading ? (
-          <div className="text-center py-20">
-            <div className="text-6xl mb-4">🎬</div>
-            <h2 className="text-2xl font-semibold text-gray-700 mb-2">
-              Start Searching for GIFs
-            </h2>
-            <p className="text-gray-500">
-              Enter a keyword above to find amazing GIFs
-            </p>
-          </div>
-        ) : (
+          {error && (
+            <div className="mb-8 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl backdrop-blur-sm flex items-start gap-3 animate-fadeInUp">
+              <AlertCircle className="w-6 h-6 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="font-semibold text-red-700 dark:text-red-300">Error: {error}</p>
+                {error.includes('API key') && (
+                  <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+                    Please add your Giphy API key to .env.local
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {!isLoading && !error && gifs.length > 0 && (
+            <div className="mb-4 text-gray-600 dark:text-gray-400 animate-fadeInUp">
+              <p className="flex items-center gap-2">
+                <span className="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full font-semibold text-sm">
+                  {gifs.length}
+                </span>
+                <span>
+                  {hasSearched && searchQuery ? (
+                    <>results for <span className="font-semibold text-gray-900 dark:text-gray-100">&quot;{searchQuery}&quot;</span></>
+                  ) : (
+                    <span className="font-semibold text-gray-900 dark:text-gray-100">Trending GIFs</span>
+                  )}
+                </span>
+              </p>
+            </div>
+          )}
+
           <GifGrid
             gifs={gifs}
             isLoading={isLoading}
             onGifClick={handleGifClick}
           />
-        )}
-      </main>
+        </main>
 
-      <footer className="bg-white border-t border-gray-200 mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 text-center text-gray-600 text-sm">
-          <p>
-            Powered by{' '}
-            <a
-              href="https://giphy.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline font-semibold"
-            >
-              Giphy
-            </a>
-          </p>
-        </div>
-      </footer>
+        <footer className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-t border-gray-200 dark:border-neutral-800 mt-12">
+          <div className="max-w-7xl mx-auto px-4 py-6 text-center text-gray-600 dark:text-gray-400 text-sm">
+            <p>
+              Powered by{' '}
+              <a
+                href="https://giphy.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary-600 dark:text-primary-400 hover:underline font-semibold transition-colors"
+              >
+                Giphy
+              </a>
+            </p>
+          </div>
+        </footer>
 
-      <GifModal gif={selectedGif} onClose={handleCloseModal} />
-    </div>
+        <GifModal gif={selectedGif} onClose={handleCloseModal} />
+      </div>
+    </>
   );
 }

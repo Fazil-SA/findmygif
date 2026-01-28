@@ -14,7 +14,7 @@ export default function GifCard({ gif, onClick }: GifCardProps) {
   return (
     <div
       onClick={onClick}
-      className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-gray-200"
+      className="relative aspect-square overflow-hidden rounded-xl cursor-pointer group bg-gray-200 dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 hover:-translate-y-2 hover:shadow-glow transition-all duration-300"
     >
       <img
         src={gif.images.fixed_height.url}
@@ -25,8 +25,8 @@ export default function GifCard({ gif, onClick }: GifCardProps) {
           isLoaded ? 'opacity-100' : 'opacity-0'
         }`}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="absolute bottom-0 left-0 right-0 p-4">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-4 backdrop-blur-sm bg-black/40">
           <h3 className="text-white font-semibold text-sm line-clamp-2">
             {gif.title || 'Untitled'}
           </h3>

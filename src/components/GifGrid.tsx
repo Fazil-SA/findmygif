@@ -31,12 +31,14 @@ export default function GifGrid({ gifs, isLoading, onGifClick }: GifGridProps) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {gifs.map((gif) => (
-        <GifCard
+      {gifs.map((gif, index) => (
+        <div
           key={gif.id}
-          gif={gif}
-          onClick={() => onGifClick(gif)}
-        />
+          className="animate-fadeInUp"
+          style={{ animationDelay: `${index * 50}ms` }}
+        >
+          <GifCard gif={gif} onClick={() => onGifClick(gif)} />
+        </div>
       ))}
     </div>
   );
