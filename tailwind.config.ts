@@ -13,17 +13,17 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-        },
-        accent: {
+          50: '#faf5ff',
+          100: '#f3e8ff',
           400: '#c084fc',
           500: '#a855f7',
           600: '#9333ea',
+          700: '#7e22ce',
+        },
+        accent: {
+          400: '#f0abfc',
+          500: '#e879f9',
+          600: '#d946ef',
         },
         neutral: {
           50: '#fafafa',
@@ -35,8 +35,8 @@ const config: Config = {
         },
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(14, 165, 233, 0.4)',
-        'glow-accent': '0 0 20px rgba(168, 85, 247, 0.4)',
+        'glow': '0 0 20px rgba(168, 85, 247, 0.4)',
+        'glow-accent': '0 0 20px rgba(217, 70, 239, 0.4)',
         'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
       },
       backdropBlur: {

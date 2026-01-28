@@ -123,21 +123,22 @@ export default function Home() {
   return (
     <>
       <Toaster position="top-right" richColors />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 transition-colors duration-200 flex flex-col">
-        <header className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-neutral-800 sticky top-0 z-10 animate-slideDown">
-          <div className="max-w-7xl mx-auto px-4 py-6">
-            <div className="flex items-center justify-center relative">
-              <div className="text-center">
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-primary-600 via-accent-500 to-primary-600 bg-clip-text text-transparent">
-                  GIF Explorer
-                </h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  Search and discover amazing GIFs
-                </p>
-              </div>
-              <div className="absolute right-0">
-                <DarkModeToggle />
-              </div>
+      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-fuchsia-50 to-pink-50 dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950 transition-colors duration-200 flex flex-col">
+        <header className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm border-b border-gray-200/50 dark:border-neutral-800/50 sticky top-0 z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-16">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">
+                <span className="bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 dark:from-violet-400 dark:via-fuchsia-400 dark:to-pink-400 bg-clip-text text-transparent">
+                  find
+                </span>
+                <span className="text-gray-700 dark:text-gray-300 font-normal">
+                  my
+                </span>
+                <span className="bg-gradient-to-r from-pink-600 via-fuchsia-600 to-violet-600 dark:from-pink-400 dark:via-fuchsia-400 dark:to-violet-400 bg-clip-text text-transparent">
+                  gif
+                </span>
+              </h1>
+              <DarkModeToggle />
             </div>
           </div>
         </header>
@@ -189,18 +190,13 @@ export default function Home() {
           />
         </main>
 
-        <footer className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-t border-gray-200 dark:border-neutral-800 mt-12">
-          <div className="max-w-7xl mx-auto px-4 py-6 text-center text-gray-600 dark:text-gray-400 text-sm">
-            <p>
+        <footer className="border-t border-gray-200/50 dark:border-neutral-800/50 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400">
               Powered by{' '}
-              <a
-                href="https://giphy.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-600 dark:text-primary-400 hover:underline font-semibold transition-colors"
-              >
-                Giphy
-              </a>
+              <span className="font-semibold bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 dark:from-violet-400 dark:via-fuchsia-400 dark:to-pink-400 bg-clip-text text-transparent">
+                findmygif
+              </span>
             </p>
           </div>
         </footer>

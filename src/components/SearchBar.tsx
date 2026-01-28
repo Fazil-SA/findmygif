@@ -49,13 +49,13 @@ export default function SearchBar({ onSearch, onClear, isLoading }: SearchBarPro
       <div className="backdrop-blur-sm bg-white/80 dark:bg-neutral-900/80 rounded-2xl p-2 shadow-glass">
         <div className="relative flex items-center gap-2">
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 dark:text-gray-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400 dark:text-gray-500 z-10 pointer-events-none" />
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Search for GIFs..."
-              className="w-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm border-2 border-gray-200 dark:border-neutral-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/50 rounded-xl px-12 py-4 text-lg transition-all duration-300 shadow-lg focus:shadow-xl dark:text-white dark:placeholder-gray-400"
+              className="w-full bg-white/80 dark:bg-neutral-800/80 backdrop-blur-sm border-2 border-gray-200 dark:border-neutral-700 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/50 rounded-xl pl-12 pr-12 py-4 text-lg transition-all duration-300 shadow-lg focus:shadow-xl dark:text-white dark:placeholder-gray-400 relative"
               disabled={isLoading}
             />
             {inputValue && (

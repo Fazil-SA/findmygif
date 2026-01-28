@@ -1,12 +1,14 @@
-# GIF Explorer
+# findmygif
 
-A modern Next.js application for searching and browsing GIFs using the Giphy API.
+A modern GIF search engine built with Next.js and powered by the Giphy API.
 
 ## Features
 
 - 🔍 Real-time GIF search with debounced input
+- 📄 Load More pagination to browse thousands of results
 - 📱 Responsive grid layout (2/3/4 columns)
 - 🎬 Full-screen GIF detail view with modal
+- 🌙 Dark mode support
 - ⚡ Built with Next.js 15, TypeScript, and Tailwind CSS
 - 🎨 Smooth animations and loading states
 - ♿ Keyboard navigation and accessibility features
@@ -22,7 +24,7 @@ A modern Next.js application for searching and browsing GIFs using the Giphy API
 
 1. Clone or navigate to the project directory:
 ```bash
-cd gif-explorer
+cd findmygif
 ```
 
 2. Install dependencies:
@@ -51,7 +53,7 @@ npm run dev
 ## Project Structure
 
 ```
-gif-explorer/
+findmygif/
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx           # Root layout with metadata
@@ -79,9 +81,10 @@ gif-explorer/
 
 1. **Search for GIFs**: Type a keyword in the search bar
 2. **Browse Results**: View GIFs in a responsive grid layout
-3. **View Details**: Click any GIF to see it in full size with details
-4. **Close Modal**: Click the X button, press Escape, or click outside
-5. **Copy URL**: Use the "Copy URL" button in the modal to copy the GIF URL
+3. **Load More**: Click the "Load More" button to see additional results
+4. **View Details**: Click any GIF to see it in full size with details
+5. **Close Modal**: Click the X button, press Escape, or click outside
+6. **Copy URL**: Use the "Copy URL" button in the modal to copy the GIF URL
 
 ## Features in Detail
 
@@ -96,6 +99,9 @@ gif-explorer/
 - Hover effects show GIF title and creator
 - Lazy loading for better performance
 - Empty state for no results
+- Load More pagination (24 GIFs per page)
+- Progress counter showing X of Y total GIFs
+- End state when all results are loaded
 
 ### GIF Modal
 - Full-screen detail view

@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "GIF Explorer - Search and Browse GIFs",
-  description: "Search and explore GIFs powered by Giphy API",
+  title: "findmygif - GIF Search Engine",
+  description: "Find the perfect GIF for any moment. Search millions of GIFs with findmygif.",
 };
 
 export default function RootLayout({
