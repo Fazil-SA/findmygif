@@ -1,130 +1,86 @@
 # findmygif
 
-A modern GIF search engine built with Next.js and powered by the Giphy API.
+A modern, responsive GIF search engine with a beautiful interface and seamless user experience.
 
-## Features
+## 🔗 Live Demo
 
-- 🔍 Real-time GIF search with debounced input
-- 📄 Load More pagination to browse thousands of results
-- 📱 Responsive grid layout (2/3/4 columns)
-- 🎬 Full-screen GIF detail view with modal
-- 🌙 Dark mode support
-- ⚡ Built with Next.js 15, TypeScript, and Tailwind CSS
-- 🎨 Smooth animations and loading states
-- ♿ Keyboard navigation and accessibility features
+**[View Live Site](https://findmygif.vercel.app/)**
 
-## Getting Started
+## ✨ Features
 
-### Prerequisites
+- **Real-time Search** - Instant GIF search with debounced input (1s delay)
+- **Infinite Browsing** - Load More pagination to explore thousands of GIFs
+- **Trending GIFs** - Discover what's popular right now
+- **Full-Screen View** - Click any GIF to view in high quality with details
+- **Dark Mode** - Seamless light/dark theme switching
+- **Fully Responsive** - Optimized for mobile, tablet, and desktop
+- **Copy & Share** - One-click URL copying for easy sharing
+- **Keyboard Support** - Press Escape to close modals
 
-- Node.js 18+ installed
-- A Giphy API key (free from [Giphy Developers](https://developers.giphy.com/))
+## 🛠️ Tech Stack
 
-### Installation
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **API:** Giphy API
+- **UI Icons:** Lucide React
+- **Deployment:** Vercel
 
-1. Clone or navigate to the project directory:
-```bash
-cd findmygif
-```
+## 🚀 Quick Start
 
-2. Install dependencies:
-```bash
-npm install
-```
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd findmygif
+   ```
 
-3. Create a `.env.local` file in the root directory and add your Giphy API key:
-```env
-NEXT_PUBLIC_GIPHY_API_KEY=your_api_key_here
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-To get a Giphy API key:
-1. Visit https://developers.giphy.com/
-2. Create an account or sign in
-3. Create a new app (select SDK option)
-4. Copy your API key
+3. **Set up environment variables**
 
-4. Run the development server:
-```bash
-npm run dev
-```
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_GIPHY_API_KEY=your_giphy_api_key_here
+   ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+   Get your free API key from [Giphy Developers](https://developers.giphy.com/)
 
-## Project Structure
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-```
-findmygif/
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx           # Root layout with metadata
-│   │   ├── page.tsx              # Home page with search and grid
-│   │   ├── globals.css           # Global styles + Tailwind
-│   │   └── api/
-│   │       └── gifs/
-│   │           └── route.ts      # API route for Giphy requests
-│   ├── components/
-│   │   ├── SearchBar.tsx         # Search input component
-│   │   ├── GifGrid.tsx           # Grid display component
-│   │   ├── GifCard.tsx           # Individual GIF card
-│   │   ├── GifModal.tsx          # Modal for GIF detail view
-│   │   └── LoadingState.tsx      # Loading skeleton/spinner
-│   ├── types/
-│   │   └── gif.ts                # TypeScript interfaces for GIF data
-│   └── lib/
-│       └── api.ts                # API client functions
-├── public/
-├── .env.local                     # API key storage (gitignored)
-└── ...config files
-```
+5. **Open your browser**
 
-## Usage
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-1. **Search for GIFs**: Type a keyword in the search bar
-2. **Browse Results**: View GIFs in a responsive grid layout
-3. **Load More**: Click the "Load More" button to see additional results
-4. **View Details**: Click any GIF to see it in full size with details
-5. **Close Modal**: Click the X button, press Escape, or click outside
-6. **Copy URL**: Use the "Copy URL" button in the modal to copy the GIF URL
-
-## Features in Detail
-
-### Search Bar
-- Debounced input (300ms delay) to reduce API calls
-- Clear button to reset search
-- Loading state during search
-- Enter key support
-
-### GIF Grid
-- Responsive layout adapts to screen size
-- Hover effects show GIF title and creator
-- Lazy loading for better performance
-- Empty state for no results
-- Load More pagination (24 GIFs per page)
-- Progress counter showing X of Y total GIFs
-- End state when all results are loaded
-
-### GIF Modal
-- Full-screen detail view
-- Large GIF display
-- Metadata (title, creator, rating)
-- Links to view on Giphy
-- Copy URL functionality
-- Keyboard (Escape) and click-outside to close
-
-## Technologies Used
-
-- **Next.js 15**: React framework with App Router
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first styling
-- **Giphy API**: GIF search and data
-
-## Build for Production
+## 📦 Build for Production
 
 ```bash
 npm run build
 npm start
 ```
 
-## License
+## 🎨 Color Palette
+
+- **Primary:** Violet (#a855f7)
+- **Accent:** Fuchsia (#e879f9)
+- **Highlight:** Pink (#d946ef)
+- **Background Light:** Violet/Fuchsia/Pink gradient
+- **Background Dark:** Neutral tones
+
+## 📸 Screenshots
+
+
+
+
+## 📄 License
 
 MIT
+
+---
+
+**Made with ❤️ by `[Fazil Shanivas Anas]`** | Powered by findmygif
