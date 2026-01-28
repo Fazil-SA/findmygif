@@ -3,14 +3,27 @@
 import { Gif } from '@/types/gif';
 import GifCard from './GifCard';
 import LoadingState from './LoadingState';
+import LoadMoreButton from './LoadMoreButton';
 
 interface GifGridProps {
   gifs: Gif[];
   isLoading: boolean;
   onGifClick: (gif: Gif) => void;
+  onLoadMore?: () => void;
+  isPaginationLoading?: boolean;
+  hasMoreResults?: boolean;
+  totalCount?: number;
 }
 
-export default function GifGrid({ gifs, isLoading, onGifClick }: GifGridProps) {
+export default function GifGrid({
+  gifs,
+  isLoading,
+  onGifClick,
+  onLoadMore,
+  isPaginationLoading = false,
+  hasMoreResults = false,
+  totalCount = 0,
+}: GifGridProps) {
   if (isLoading) {
     return <LoadingState />;
   }
@@ -30,16 +43,28 @@ export default function GifGrid({ gifs, isLoading, onGifClick }: GifGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {gifs.map((gif, index) => (
-        <div
-          key={gif.id}
-          className="animate-fadeInUp"
-          style={{ animationDelay: `${index * 50}ms` }}
-        >
-          <GifCard gif={gif} onClick={() => onGifClick(gif)} />
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {gifs.map((gif, index) => (
+          <div
+            key={gif.id}
+            className="animate-fadeInUp"
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
+            <GifCard gif={gif} onClick={() => onGifClick(gif)} />
+          </div>
+        ))}
+      </div>
+
+      {onLoadMore && (
+        <LoadMoreButton
+          onLoadMore={onLoadMore}
+          isLoading={isPaginationLoading}
+          hasMore={hasMoreResults}
+          currentCount={gifs.length}
+          totalCount={totalCount}
+        />
+      )}
+    </>
   );
 }

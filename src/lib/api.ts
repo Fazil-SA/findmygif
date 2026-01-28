@@ -1,8 +1,8 @@
 import { SearchResponse } from '@/types/gif';
 
-export async function searchGifs(query: string, limit: number = 24): Promise<SearchResponse> {
+export async function searchGifs(query: string, limit: number = 24, offset: number = 0): Promise<SearchResponse> {
   try {
-    const response = await fetch(`/api/gifs?q=${encodeURIComponent(query)}&limit=${limit}`);
+    const response = await fetch(`/api/gifs?q=${encodeURIComponent(query)}&limit=${limit}&offset=${offset}`);
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -17,9 +17,9 @@ export async function searchGifs(query: string, limit: number = 24): Promise<Sea
   }
 }
 
-export async function getTrendingGifs(limit: number = 24): Promise<SearchResponse> {
+export async function getTrendingGifs(limit: number = 24, offset: number = 0): Promise<SearchResponse> {
   try {
-    const response = await fetch(`/api/trending?limit=${limit}`);
+    const response = await fetch(`/api/trending?limit=${limit}&offset=${offset}`);
 
     if (!response.ok) {
       const errorData = await response.json();

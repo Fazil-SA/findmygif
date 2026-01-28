@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
     const limit = searchParams.get('limit') || '24';
+    const offset = searchParams.get('offset') || '0';
 
     if (!GIPHY_API_KEY) {
       return NextResponse.json(
@@ -18,6 +19,7 @@ export async function GET(request: NextRequest) {
     const url = new URL(GIPHY_TRENDING_URL);
     url.searchParams.append('api_key', GIPHY_API_KEY);
     url.searchParams.append('limit', limit);
+    url.searchParams.append('offset', offset);
     url.searchParams.append('rating', 'g');
 
     const response = await fetch(url.toString());

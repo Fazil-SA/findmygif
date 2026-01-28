@@ -8,6 +8,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const query = searchParams.get('q');
     const limit = searchParams.get('limit') || '24';
+    const offset = searchParams.get('offset') || '0';
 
     if (!query) {
       return NextResponse.json(
@@ -27,6 +28,7 @@ export async function GET(request: NextRequest) {
     url.searchParams.append('api_key', GIPHY_API_KEY);
     url.searchParams.append('q', query);
     url.searchParams.append('limit', limit);
+    url.searchParams.append('offset', offset);
     url.searchParams.append('rating', 'g');
     url.searchParams.append('lang', 'en');
 

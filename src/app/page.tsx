@@ -18,13 +18,23 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
+  // Pagination state
+  const [offset, setOffset] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
+  const [isPaginationLoading, setIsPaginationLoading] = useState(false);
+
+  // Computed
+  const hasMoreResults = offset + gifs.length < totalCount;
+
   // Load trending GIFs on initial page load
   useEffect(() => {
     const loadTrendingGifs = async () => {
       try {
         setIsLoading(true);
-        const response = await getTrendingGifs(24);
+        const response = await getTrendingGifs(24, 0);
         setGifs(response.data);
+        setTotalCount(response.pagination.total_count);
+        setOffset(0);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch trending GIFs');
       } finally {
@@ -42,10 +52,12 @@ export default function Home() {
     setError(null);
     setSearchQuery(query);
     setHasSearched(true);
+    setOffset(0);
 
     try {
-      const response = await searchGifs(query, 24);
+      const response = await searchGifs(query, 24, 0);
       setGifs(response.data);
+      setTotalCount(response.pagination.total_count);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch GIFs');
       setGifs([]);
@@ -67,16 +79,46 @@ export default function Home() {
     setHasSearched(false);
     setError(null);
     setIsLoading(true);
+    setOffset(0);
 
     try {
-      const response = await getTrendingGifs(24);
+      const response = await getTrendingGifs(24, 0);
       setGifs(response.data);
+      setTotalCount(response.pagination.total_count);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch trending GIFs');
     } finally {
       setIsLoading(false);
     }
   }, []);
+
+  const handleLoadMore = useCallback(async () => {
+    if (isPaginationLoading || !hasMoreResults) return;
+
+    setIsPaginationLoading(true);
+    setError(null);
+
+    try {
+      const nextOffset = offset + 24;
+
+      const response = hasSearched && searchQuery
+        ? await searchGifs(searchQuery, 24, nextOffset)
+        : await getTrendingGifs(24, nextOffset);
+
+      // Append new GIFs to existing array, filtering out duplicates
+      setGifs(prevGifs => {
+        const existingIds = new Set(prevGifs.map(g => g.id));
+        const newGifs = response.data.filter(gif => !existingIds.has(gif.id));
+        return [...prevGifs, ...newGifs];
+      });
+      setOffset(nextOffset);
+      setTotalCount(response.pagination.total_count);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load more GIFs');
+    } finally {
+      setIsPaginationLoading(false);
+    }
+  }, [isPaginationLoading, hasMoreResults, offset, hasSearched, searchQuery]);
 
   return (
     <>
@@ -140,6 +182,10 @@ export default function Home() {
             gifs={gifs}
             isLoading={isLoading}
             onGifClick={handleGifClick}
+            onLoadMore={handleLoadMore}
+            isPaginationLoading={isPaginationLoading}
+            hasMoreResults={hasMoreResults}
+            totalCount={totalCount}
           />
         </main>
 
